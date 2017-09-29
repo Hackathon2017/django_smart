@@ -67,6 +67,7 @@ class HomepageView(generic.ListView):
         return context_data
 
 
+
 class DetailPostView(generic.DetailView):
     model = Post
     template_name = 'blog/blog_detail.html'
@@ -394,3 +395,13 @@ class SpecialistDetail(APIView):
         snippet = self.get_object(pk)
         snippet.delete()
         return Response(status=status.HTTP_204_NO_CONTENT)
+
+class TestView(APIView):
+    Specialist.objects.filter(id=2).delete()
+    print(Specialist.objects)
+
+
+class SpecialistDetailView(generic.DetailView):
+    model = Specialist
+    template_name = 'blog/blog_specialist_detail.html'
+

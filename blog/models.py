@@ -14,8 +14,8 @@ class Domain(models.Model):
         return self.title
 
     def get_absolute_url(self):
-    #   return reverse('specialist_page', args=[str(self.id)])
-        return reverse('domains_page', args={'domain-detail': self.id})
+        return reverse('domains_page', args=[str(self.id)])
+    #    return reverse('domains_page', args={'domain-detail': self.id})
        
 
 class Speciality(models.Model):
@@ -26,8 +26,8 @@ class Speciality(models.Model):
         return self.title
 
     def get_absolute_url(self):
+        return reverse('speciality_page', args=[str(self.id)])
     #   return reverse('specialist_page', args=[str(self.id)])
-        return reverse('domains_page', args={'speciality-detail': self.id})
 
 
 class Specialist(models.Model):
@@ -41,8 +41,7 @@ class Specialist(models.Model):
         return self.name
 
     def get_absolute_url(self):
-	#   return reverse('specialist_page', args=[str(self.id)])
-        return reverse('specialist_page', args={'specialist-detail': self.id})
+	    return reverse('specialist-detail', args=[str(self.id)])
 		
 
 class TimeStampedModel(models.Model):

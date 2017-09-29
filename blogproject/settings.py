@@ -84,7 +84,7 @@ INSTALLED_APPS = [
 
 # Django Suit configuration
 SUIT_CONFIG = {
-    'ADMIN_NAME': 'Python Learning',
+    'ADMIN_NAME': 'Sofrecom smart search',
     'SEARCH_URL': '/admin/blog/post/',
     'MENU': (
         {'app': 'blog', 'label': 'Blog', 'models': ('post', 'tag', 'page', 'author', 'gallery', 'visitor'),

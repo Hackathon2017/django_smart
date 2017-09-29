@@ -18,12 +18,25 @@ class DomainResource(resources.ModelResource):
     class Meta:
         model = Domain
 
-        
 class DomainAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+
     resource_class = DomainResource
 
     list_display = ( 'title', 'about' )
     search_fields = [ 'title', 'about' ]
+
+
+class SpecialityResource(resources.ModelResource):
+
+    class Meta:
+        model = Speciality
+
+        
+class SpecialityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = SpecialityResource
+
+    list_display = ( 'title', 'domain' )
+    search_fields = [ 'title', 'domain' ]
 
 
 class SpecialistResource(resources.ModelResource):
@@ -157,6 +170,7 @@ class VisitorAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 
 admin.site.register(Domain, DomainAdmin)
+admin.site.register(Speciality, SpecialityAdmin)
 admin.site.register(Specialist, SpecialistAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Tag, TagAdmin)

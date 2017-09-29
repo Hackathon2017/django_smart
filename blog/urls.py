@@ -25,8 +25,10 @@ urlpatterns = [
 
     url(r'^$', HomepageView.as_view(), name='homepage'),
 	url(r'^specialists/', SpecialistList.as_view()),
+    url(r'^test/', TestView.as_view(), name='test'),
+
 	url(r'^specialist/', SpecialistListView.as_view(), name='specialist'),
-#    url(r'^specialist/(?P<pk>\d+)$', views.SpecialistDetailView.as_view(), name='specialist-detail'),
+    url(r'^specialist/(?P<pk>\d+)$', SpecialistDetailView.as_view(), name='specialist-detail'),
    # url(r'^specialists/(?P<pk>[0-9]+)/', SpecialistDetail.as_view()),	
     url(r'^blog/(?P<slug>[\w\-]+)/$', DetailPostView.as_view(), name='detail_post_page'),
     url(r'^search/$', SearchPostsView.as_view(), name='search_posts_page'),
