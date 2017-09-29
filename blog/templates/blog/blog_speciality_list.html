@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Speciality List</h1>
+
+    {% if speciality_list %}
+    <ul>
+
+      {% for speciality in speciality_list %}
+      <li>
+        <a href="{{ speciality.get_absolute_url }}">{{ speciality.title }}</a> ({{speciality.title}})
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no speciality in the library.</p>
+    {% endif %}       
+{% endblock %}

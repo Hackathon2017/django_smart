@@ -14,7 +14,7 @@ class Domain(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('domains_page', args=[str(self.id)])
+        return reverse('domain-detail', args=[str(self.id)])
     #    return reverse('domains_page', args={'domain-detail': self.id})
        
 
@@ -26,7 +26,7 @@ class Speciality(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return reverse('speciality_page', args=[str(self.id)])
+        return reverse('speciality-detail', args=[str(self.id)])
     #   return reverse('specialist_page', args=[str(self.id)])
 
 
@@ -74,24 +74,24 @@ class Author(models.Model):
         verbose_name_plural = 'Authors'
 
 
-class Avis(models.Model):
-    author = models.ForeignKey(Author, related_name='author_avis')
-    specialist = models.ForeignKey(Specialist, related_name='specialist_avis')
-    score = PickledObjectField()
-    description = RedactorField()
-    slug = models.SlugField(max_length=200, unique=True)
-    meta_description = models.TextField(null=True, blank=True)
-    photo = models.ImageField(upload_to='gallery/covers/%Y/%m/%d',
-                              null=True,
-                              blank=True,
-                              help_text='Optional photo post')
+# class Avis(models.Model):
+#     author = models.ForeignKey(Author, related_name='author_avis')
+#     specialist = models.ForeignKey(Specialist, related_name='specialist_avis')
+#     score = PickledObjectField()
+#     description = RedactorField()
+#     slug = models.SlugField(max_length=200, unique=True)
+#     meta_description = models.TextField(null=True, blank=True)
+#     photo = models.ImageField(upload_to='gallery/covers/%Y/%m/%d',
+#                               null=True,
+#                               blank=True,
+#                               help_text='Optional photo post')
 
-    def __str__(self):
-        return self.phone
+#     def __str__(self):
+#         return self.phone
 
-    def get_absolute_url(self):
-    #   return reverse('specialist_page', args=[str(self.id)])
-        return reverse('domains_page', args={'speciality-detail': self.id})
+#     def get_absolute_url(self):
+#     #   return reverse('specialist_page', args=[str(self.id)])
+#         return reverse('domains_page', args={'speciality-detail': self.id})
 
 
 class Tag(models.Model):
@@ -118,6 +118,8 @@ class PostQuerySet(models.QuerySet):
 
 class Post(TimeStampedModel):
     author = models.ForeignKey(Author, related_name='author_post')
+    specialist = models.ForeignKey(Specialist, related_name='specialist_avis', null=True, blank=True)
+    score = PickledObjectField()
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     cover = models.ImageField(upload_to='gallery/covers/%Y/%m/%d',
@@ -201,3 +203,4 @@ class Visitor(TimeStampedModel):
         verbose_name = 'Detail Visitor'
         verbose_name_plural = 'Visitors'
         ordering = ['-created']
+

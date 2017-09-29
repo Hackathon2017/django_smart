@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Liste des domaines</h1>
+
+    {% if domain_list %}
+    <ul>
+
+      {% for domain in domain_list %}
+      <li>
+        <a href="{{ domain.get_absolute_url }}">{{ domain.title }}</a> ({{domain.about}})
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no domains in the library.</p>
+    {% endif %}       
+{% endblock %}

@@ -349,7 +349,7 @@ class TrendingPostsView(generic.ListView):
 # specialist/
 class SpecialistListView(generic.ListView):
     model = Specialist
-    context_object_name = 'specialist_list'   # your own name for the list as a template variable
+#    context_object_name = 'specialist_list'   # your own name for the list as a template variable
     template_name = 'blog/blog_specialist_list.html'  # Specify your own template name/location
 
     def get_queryset(self):	
@@ -405,3 +405,102 @@ class SpecialistDetailView(generic.DetailView):
     model = Specialist
     template_name = 'blog/blog_specialist_detail.html'
 
+
+
+# Lists all specialist or creates a new one
+# specialist/
+class DomainsListView(generic.ListView):
+    model = Domain
+    context_object_name = 'domain_list'   # your own name for the list as a template variable
+    template_name = 'blog/blog_domains_list.html'
+
+    def get_queryset(self): 
+        return Domain.objects.all()
+
+
+# def DomainSpecialitiesListView(request,pk):
+#     model = Speciality
+#     context_object_name = 'speciality_list'
+#     template_name = 'blog/blog_speciality_list.html'
+
+#     try:
+#         domain_id=Domain.objects.get(pk=pk)
+#     except Domain.DoesNotExist:
+#         raise Http404("Domain does not exist")
+
+#     def get_queryset(self): 
+#         return Speciality.objects.all()
+
+#     return render(
+#         request,
+#         'blog/blog_speciality_list.html',
+#         context={'domain':domain_id,}
+#     )
+
+
+class DomainSpecialitiesListView(generic.ListView):
+    template_name = 'blog/blog_speciality_list.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        pk = self.kwargs['pk']
+        self.domain = get_object_or_404(Domain, pk=pk)
+        results_filter = Speciality.objects.filter(domain=self.domain)
+        return results_filter
+
+    def get_context_data(self, **kwargs):
+        context_data = super(DomainSpecialitiesListView, self).get_context_data(**kwargs)
+        context_data['domain'] = self.domain
+        context_data['page_range'] = GenericPaginator(
+            self.get_queryset(),
+            self.paginate_by,
+            self.request.GET.get('page')
+        ).get_page_range()
+        return context_data
+
+
+class SpecialistesListView(generic.ListView):
+    template_name = 'blog/blog_specialistes_list.html'
+    paginate_by = 10
+
+    # for filtering list of specialists on speciality
+    def get_queryset(self):
+        pk = self.kwargs['pk']
+        self.speciality = get_object_or_404(Speciality, pk=pk)
+        results_filter = Specialist.objects.filter(speciality=self.speciality)
+        return results_filter
+
+    # for pagination
+    def get_context_data(self, **kwargs):
+        context_data = super(SpecialistesListView, self).get_context_data(**kwargs)
+        context_data['speciality'] = self.speciality
+        context_data['page_range'] = GenericPaginator(
+            self.get_queryset(),
+            self.paginate_by,
+            self.request.GET.get('page')
+        ).get_page_range()
+        return context_data
+
+
+
+class SpecialistPostsView(generic.ListView):
+    template_name = 'blog/blog_posts_specialist.html'
+    paginate_by = 10
+
+    def get_queryset(self):
+        pk = self.kwargs['pk']
+        self.specialist = get_object_or_404(Specialist, pk=pk)
+        posts_specialist = Post.objects.published().filter(
+            specialist=self.specialist
+        ).order_by('-created').order_by('-id')
+        return posts_specialist
+
+    def get_context_data(self, **kwargs):
+        context_data = super(SpecialistPostsView, self).get_context_data(**kwargs)
+        context_data['specialist'] = self.specialist
+        context_data['page_range'] = GenericPaginator(
+            self.get_queryset(),
+            self.paginate_by,
+            self.request.GET.get('page')
+        ).get_page_range()
+        return context_data

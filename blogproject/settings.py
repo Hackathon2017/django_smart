@@ -50,7 +50,8 @@ INSTALLED_APPS = [
     'nocaptcha_recaptcha',
     'import_export',
 	
-    'blog',	
+    'blog',
+    'corsheaders'
 ]
 
 # Django Suit configuration example
@@ -98,6 +99,7 @@ SUIT_CONFIG = {
 }
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
