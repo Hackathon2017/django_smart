@@ -7,7 +7,8 @@ from redactor.fields import RedactorField
 from picklefield.fields import PickledObjectField
 
 class Domain(models.Model):
-    title = models.CharField(max_length=200) 
+    title = models.CharField(max_length=200)
+    about = models.TextField(null=True, blank=True)
 
     def __str__(self):
         return self.title
