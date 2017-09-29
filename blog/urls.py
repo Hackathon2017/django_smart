@@ -4,6 +4,7 @@ from django.contrib.sitemaps import GenericSitemap
 from django.contrib.sitemaps.views import sitemap
 from blog.views import *
 from blog.feed import LatestPosts
+from rest_framework.urlpatterns import format_suffix_patterns
 
 info_dict = {
     'queryset': Post.objects.all(),
@@ -23,6 +24,10 @@ urlpatterns = [
     # url(r'^$', TemplateView.as_view(template_name='maintenance.html', content_type='text/html')),
 
     url(r'^$', HomepageView.as_view(), name='homepage'),
+	url(r'^specialists/', SpecialistList.as_view()),
+	url(r'^specialist/', SpecialistListView.as_view(), name='specialist'),
+#    url(r'^specialist/(?P<pk>\d+)$', views.SpecialistDetailView.as_view(), name='specialist-detail'),
+   # url(r'^specialists/(?P<pk>[0-9]+)/', SpecialistDetail.as_view()),	
     url(r'^blog/(?P<slug>[\w\-]+)/$', DetailPostView.as_view(), name='detail_post_page'),
     url(r'^search/$', SearchPostsView.as_view(), name='search_posts_page'),
     url(r'^author/(?P<username>[\w\-]+)/$', AuthorPostsView.as_view(), name='author_posts_page'),
@@ -38,3 +43,5 @@ urlpatterns = [
     url(r'^trending/$', TrendingPostsView.as_view(), name='trending_posts_page'),
     url(r'^(?P<slug>[\w\-]+)/$', DetailPageView.as_view(), name='detail_page'),
 ]
+
+#urlpatterns = format_suffix_patterns(urlpatterns)

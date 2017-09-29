@@ -13,12 +13,25 @@ from suit.widgets import AutosizedTextarea
 from blog.models import *
 
 
+class SpecialistResource(resources.ModelResource):
+
+    class Meta:
+        model = Specialist
+
+		
+class SpecialistAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = SpecialistResource
+
+    list_display = ( 'name', 'speciality',  'geocode', 'about_website', 'phone' )
+    search_fields = [ 'name', 'speciality',  'geocode', 'about_website', 'phone' ]
+
+	
 class AuthorResource(resources.ModelResource):
 
     class Meta:
         model = Author
 
-
+		
 class AuthorAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = AuthorResource
     list_display = ('user', 'website', 'about')
@@ -130,6 +143,7 @@ class VisitorAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('post', 'ip', 'created', 'modified')
 
 
+admin.site.register(Specialist, SpecialistAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Post, PostAdmin)

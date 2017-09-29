@@ -17,6 +17,8 @@ from django.conf import settings
 from django.contrib import admin
 from django.conf.urls import include, url
 from django.conf.urls.static import static
+from rest_framework.urlpatterns import format_suffix_patterns
+from blog import views
 
 from django.conf.urls import (
     handler400, handler403, handler404, handler500
@@ -30,4 +32,7 @@ urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^redactor/', include('redactor.urls')),
     url(r'^', include('blog.urls')),
+	
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+urlpatterns = format_suffix_patterns(urlpatterns)

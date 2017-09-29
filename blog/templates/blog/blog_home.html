@@ -26,7 +26,7 @@
       {% endif %}
       {{ object.description|safe|striptags|truncatewords:"50"|linebreaks }}
       <span style="margin-bottom: .5em;float:right">
-        <a href="{% url 'detail_post_page' slug=object.slug %}">Read More &rarr;</a>
+        <a href="{% url 'detail_post_page' slug=object.slug %}">Lire l'article &rarr;</a>
       </span>
       <div style="clear:both;border-bottom: 1px solid #F2F2F2;margin: 10px 0"></div>
     </div>

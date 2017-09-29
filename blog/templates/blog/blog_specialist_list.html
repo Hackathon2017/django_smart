@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Specialist List</h1>
+
+    {% if specialist_list %}
+    <ul>
+
+      {% for specialist in specialist_list %}
+      <li>
+        <a href="{{ specialist.get_absolute_url }}">{{ specialist.name }}</a> ({{specialist.phone}})
+      </li>
+      {% endfor %}
+
+    </ul>
+    {% else %}
+      <p>There are no specialists in the library.</p>
+    {% endif %}       
+{% endblock %}

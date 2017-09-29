@@ -4,7 +4,45 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 
 from redactor.fields import RedactorField
+from picklefield.fields import PickledObjectField
 
+class Domain(models.Model):
+    title = models.CharField(max_length=200) 
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+    #   return reverse('specialist_page', args=[str(self.id)])
+        return reverse('domains_page', args={'domain-detail': self.id})
+       
+
+class Speciality(models.Model):
+    title = models.CharField(max_length=200) 
+    domain = models.ForeignKey(Domain, related_name='speciality_domain')
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+    #   return reverse('specialist_page', args=[str(self.id)])
+        return reverse('domains_page', args={'speciality-detail': self.id})
+
+
+class Specialist(models.Model):
+    name = models.CharField(max_length=200) 
+    speciality = models.ForeignKey(Speciality, related_name='speciality')
+    geocode = models.CharField(max_length=200)
+    about_website = models.TextField(null=True, blank=True)
+    phone = models.CharField(max_length=200)
+
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+	#   return reverse('specialist_page', args=[str(self.id)])
+        return reverse('specialist_page', args={'specialist-detail': self.id})
+		
 
 class TimeStampedModel(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -12,6 +50,7 @@ class TimeStampedModel(models.Model):
 
     class Meta:
         abstract = True
+
 
 
 class Author(models.Model):
@@ -33,6 +72,26 @@ class Author(models.Model):
     class Meta:
         verbose_name = 'Detail Author'
         verbose_name_plural = 'Authors'
+
+
+class Avis(models.Model):
+    author = models.ForeignKey(Author, related_name='author_avis')
+    specialist = models.ForeignKey(Specialist, related_name='specialist_avis')
+    score = PickledObjectField()
+    description = RedactorField()
+    slug = models.SlugField(max_length=200, unique=True)
+    meta_description = models.TextField(null=True, blank=True)
+    photo = models.ImageField(upload_to='gallery/covers/%Y/%m/%d',
+                              null=True,
+                              blank=True,
+                              help_text='Optional photo post')
+
+    def __str__(self):
+        return self.phone
+
+    def get_absolute_url(self):
+    #   return reverse('specialist_page', args=[str(self.id)])
+        return reverse('domains_page', args={'speciality-detail': self.id})
 
 
 class Tag(models.Model):

@@ -4,7 +4,7 @@ import socket
 import json
 
 from django.views import generic
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import (render, render_to_response, redirect, get_object_or_404)
 from django.core.mail import (send_mail, BadHeaderError)
 from django.core.exceptions import ObjectDoesNotExist
@@ -15,6 +15,13 @@ from django.db.models import (Q, Count)
 from blog.models import *
 from blog.forms import ContactForm
 from blog.utils.paginator import GenericPaginator
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+from .models import Specialist
+from .serializers import SpecialistSerializer
+from django.http import Http404
+from django.views.generic import ListView
 
 
 def handler400(request):
@@ -334,3 +341,56 @@ class TrendingPostsView(generic.ListView):
         context_data = super(TrendingPostsView, self).get_context_data(**kwargs)
         context_data['filter'] = self.get_filter
         return context_data
+
+		
+		
+# Lists all specialist or creates a new one
+# specialist/
+class SpecialistListView(generic.ListView):
+    model = Specialist
+    context_object_name = 'specialist_list'   # your own name for the list as a template variable
+    template_name = 'blog/blog_specialist_list.html'  # Specify your own template name/location
+
+    def get_queryset(self):	
+        #return Specialist.objects.filter(speciality__icontains='medecine') # Get 5 books containing the title war
+        return Specialist.objects.all()
+
+
+class SpecialistList(APIView):
+
+    def get(self, request):
+        specialists = Specialist.objects.all()
+        serializer = SpecialistSerializer(specialists, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
+    def post(self, request):
+        serializer = SpecialistSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+class SpecialistDetail(APIView):
+    def get_object(self, pk):
+        try:
+            return Specialist.objects.get(pk=pk)
+        except Specialist.DoesNotExist:
+            raise Http404
+
+    def get(self, request, pk):
+        snippet = self.get_object(pk)
+        serializer = SpecialistSerializer(snippet)
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        snippet = self.get_object(pk)
+        serializer = SpecialistSerializer(snippet, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    def delete(self, request, pk):
+        snippet = self.get_object(pk)
+        snippet.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
