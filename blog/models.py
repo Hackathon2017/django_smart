@@ -5,6 +5,7 @@ from django.core.urlresolvers import reverse
 
 from redactor.fields import RedactorField
 from picklefield.fields import PickledObjectField
+import json
 
 class Domain(models.Model):
     title = models.CharField(max_length=200)
@@ -15,7 +16,6 @@ class Domain(models.Model):
 
     def get_absolute_url(self):
         return reverse('domain-detail', args=[str(self.id)])
-    #    return reverse('domains_page', args={'domain-detail': self.id})
        
 
 class Speciality(models.Model):
@@ -23,12 +23,10 @@ class Speciality(models.Model):
     domain = models.ForeignKey(Domain, related_name='speciality_domain')
 
     def __str__(self):
-        return self.title
+        return json.dumps({ "title":self.title , "domain": str(self.domain) })
 
     def get_absolute_url(self):
         return reverse('speciality-detail', args=[str(self.id)])
-    #   return reverse('specialist_page', args=[str(self.id)])
-
 
 class Specialist(models.Model):
     name = models.CharField(max_length=200) 
@@ -36,6 +34,11 @@ class Specialist(models.Model):
     geocode = models.CharField(max_length=200)
     about_website = models.TextField(null=True, blank=True)
     phone = models.CharField(max_length=200)
+
+class Rate(models.Model):
+    rate_name = models.CharField(max_length=200)
+    rate_value = models.IntegerField()
+    specialist = models.ForeignKey(Specialist, related_name='specialist')
 
     def __str__(self):
         return self.name

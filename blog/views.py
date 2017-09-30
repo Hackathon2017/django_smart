@@ -360,11 +360,24 @@ class SpecialistListView(generic.ListView):
 class SpecialistList(APIView):
 
     def get(self, request):
-        specialists = Specialist.objects.all()
+        #specialists = Specialist.objects.all()
+        specialists = Specialist.objects.filter(speciality=request.GET.__getitem__('speciality'))
+        speciality = Speciality.objects.filter(id=request.GET.__getitem__('speciality')).values('title','domain')
+        domain = Domain.objects.filter(id=speciality[0]['domain']).values('title', 'about')
+        print(str(domain))
         serializer = SpecialistSerializer(specialists, many=True)
+        json_specialists = JsonResponse(serializer.data, safe=False)
+        # jj = json.dumps(serializer.data)
+        # jj2 = json.loads(jj)
+        #jj2['speciality']= speciality
+        #serializers.serialize("json", self.get_queryset())
+        serializer.data[0]['speciality']=str(speciality[0])
+        serializer.data[0]['domain']=str(domain[0])
+        #serializer.data[0]['domain']=str(domain[0])
         return JsonResponse(serializer.data, safe=False)
 
     def post(self, request):
+        print(request.data)
         serializer = SpecialistSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()

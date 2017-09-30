@@ -129,19 +129,19 @@ class PostAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_per_page = 20
 
 
-class PageResource(resources.ModelResource):
+# class PageResource(resources.ModelResource):
 
-    class Meta:
-        model = Page
+#     class Meta:
+#         model = Page
 
 
-class PageAdmin(ImportExportModelAdmin, admin.ModelAdmin):
-    resource_class = PageResource
-    list_display = ('title', 'author', 'created', 'modified', 'publish')
-    prepopulated_fields = {'slug': ('title',)}
-    search_fields = ['title', 'description', 'author__user__username']
-    list_filter = ['publish', 'author__user__username', 'created']
-    list_per_page = 20
+# class PageAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+#     resource_class = PageResource
+#     list_display = ('title', 'author', 'created', 'modified', 'publish')
+#     prepopulated_fields = {'slug': ('title',)}
+#     search_fields = ['title', 'description', 'author__user__username']
+#     list_filter = ['publish', 'author__user__username', 'created']
+#     list_per_page = 20
 
 
 class GalleryResource(resources.ModelResource):
@@ -175,6 +175,5 @@ admin.site.register(Specialist, SpecialistAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Post, PostAdmin)
-admin.site.register(Page, PageAdmin)
 admin.site.register(Gallery, GalleryAdmin)
 admin.site.register(Visitor, VisitorAdmin)

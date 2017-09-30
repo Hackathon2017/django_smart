@@ -199,3 +199,6 @@ REDACTOR_AUTH_DECORATOR = 'django.contrib.auth.decorators.login_required'
 # https://www.google.com/recaptcha
 NORECAPTCHA_SITE_KEY = "key_key_key_key"
 NORECAPTCHA_SECRET_KEY = "key_key_key_key"
+
+
+CORS_ORIGIN_ALLOW_ALL = True
