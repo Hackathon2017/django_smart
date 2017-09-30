@@ -1,0 +1,6 @@
+{% extends "smartsearch/smartsearch_home.html" %}
+{% block title %}Avis sur le specialiste {{ specialist }} - {{ block.super }}{% endblock %}
+{% block canonical_url %}https://{{ request.get_host }}{% url 'specialist_posts_page' specialistx=specialist %}{% endblock %}
+{% block message_info_homepage %}
+  <h1><p class="message__info">Les avis sur le specialiste: "{{ specialist }}"</p></h1>
+{% endblock %}

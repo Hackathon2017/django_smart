@@ -1,0 +1,44 @@
+{% load staticfiles %}<!DOCTYPE html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link href="{% static "assets/css/bootstrap.min.css" %}" rel="stylesheet">
+  <link href="{% static "assets/css/smartsearch.css" %}" rel="stylesheet">
+  <link href="{% static "assets/css/style.css" %}" rel="stylesheet">
+  <link href="{% static "assets/css/menus_spc.css" %}" rel="stylesheet">  
+  
+  <script src="{% static "assets/js/jquery.min.js" %}"></script>
+
+</head>
+
+<body>
+  <li><a href="{% url 'specialist' %}">All specialists</a></li>
+  {% include "includes/menu.html" %}
+<!--  {% include "includes/menus_spc.html" %}
+  -->
+
+  <div class="container main__container">
+    <div class="row">
+      <div class="col-sm-8 smartsearch-main">
+        {% block content %}{% endblock %}
+      </div><!-- /.smartsearch-main -->
+
+      <div class="col-sm-3 col-sm-offset-1 smartsearch-sidebar" id="non-printable">
+        {% include "includes/sidebar.html" %}
+      </div><!-- /.smartsearch-sidebar -->
+    </div><!-- /.row -->
+  </div><!-- /.main__container -->
+
+  <div class="smartsearch-footer" id="non-printable">
+    <p>
+      Copyright &#169; {% now "Y" %}, <a href="{% url "homepage" %}">SMART SEARCH</a> -
+      Powered <a href="https://www.djangoproject.com/" target="_blank">Django</a> -
+      Created by <a href="https://sofrecom.com" target="_blank">HANNIBAL</a></p>
+    <p>
+      <a href="#">Back to top</a>
+    </p>
+  </div>
+
+  <script src="{% static "assets/js/bootstrap.min.js" %}"></script>
+</body>
+</html>
