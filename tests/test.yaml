@@ -1,0 +1,5 @@
+## Example config file
+---
+  backend_host: '172.16.3.223'
+  backend_port: '8000'
+  logging_level: DEBUG

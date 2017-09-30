@@ -10,9 +10,10 @@ import json
 class Domain(models.Model):
     title = models.CharField(max_length=200)
     about = models.TextField(null=True, blank=True)
+    imagePath = models.CharField(max_length=200,null=True, blank=True)
 
     def __str__(self):
-        return self.title
+        return json.dumps({ "id":self.id , "title":self.title , "about": str(self.about), "imagePath": str(self.imagePath) })
 
     def get_absolute_url(self):
         return reverse('domain-detail', args=[str(self.id)])
@@ -21,9 +22,10 @@ class Domain(models.Model):
 class Speciality(models.Model):
     title = models.CharField(max_length=200) 
     domain = models.ForeignKey(Domain, related_name='speciality_domain')
+    imagePath = models.CharField(max_length=200,null=True, blank=True)
 
     def __str__(self):
-        return json.dumps({ "title":self.title , "domain": str(self.domain) })
+        return json.dumps({ "title":self.title , "domain": str(self.domain), "imagePath": str(self.imagePath) })
 
     def get_absolute_url(self):
         return reverse('speciality-detail', args=[str(self.id)])
@@ -34,6 +36,7 @@ class Specialist(models.Model):
     geocode = models.CharField(max_length=200)
     about_website = models.TextField(null=True, blank=True)
     phone = models.CharField(max_length=200)
+    global_rate = models.IntegerField(null=True, blank=True)
 
     def __str__(self):
         return self.name
@@ -42,17 +45,6 @@ class Specialist(models.Model):
       return reverse('specialist-detail', args=[str(self.id)])
 
 
-class Rate(models.Model):
-    rate_name = models.CharField(max_length=200)
-    rate_value = models.IntegerField()
-    specialist = models.ForeignKey(Specialist, related_name='specialist')
-
-    def __str__(self):
-        return self.rate_name
-
-    def get_absolute_url(self):
-	    return reverse('rate-detail', args=[str(self.id)])
-		
 
 class TimeStampedModel(models.Model):
     created = models.DateTimeField(auto_now_add=True)
@@ -84,26 +76,6 @@ class Author(models.Model):
         verbose_name_plural = 'Authors'
 
 
-# class Avis(models.Model):
-#     author = models.ForeignKey(Author, related_name='author_avis')
-#     specialist = models.ForeignKey(Specialist, related_name='specialist_avis')
-#     score = PickledObjectField()
-#     description = RedactorField()
-#     slug = models.SlugField(max_length=200, unique=True)
-#     meta_description = models.TextField(null=True, blank=True)
-#     photo = models.ImageField(upload_to='gallery/covers/%Y/%m/%d',
-#                               null=True,
-#                               blank=True,
-#                               help_text='Optional photo post')
-
-#     def __str__(self):
-#         return self.phone
-
-#     def get_absolute_url(self):
-#     #   return reverse('specialist_page', args=[str(self.id)])
-#         return reverse('domains_page', args={'speciality-detail': self.id})
-
-
 class Tag(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
@@ -129,18 +101,17 @@ class PostQuerySet(models.QuerySet):
 class Post(TimeStampedModel):
     author = models.ForeignKey(Author, related_name='author_post')
     specialist = models.ForeignKey(Specialist, related_name='specialist_avis', null=True, blank=True)
-    score = PickledObjectField()
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
     cover = models.ImageField(upload_to='gallery/covers/%Y/%m/%d',
                               null=True,
                               blank=True,
                               help_text='Optional cover post')
+    avis = models.TextField(null=True, blank=True)
     description = RedactorField()
     tags = models.ManyToManyField('Tag')
     keywords = models.CharField(max_length=200, null=True, blank=True,
                                 help_text='Keywords sparate by comma.')
-    meta_description = models.TextField(null=True, blank=True)
 
     publish = models.BooleanField(default=True)
     objects = PostQuerySet.as_manager()
@@ -159,6 +130,20 @@ class Post(TimeStampedModel):
         verbose_name = 'Detail Post'
         verbose_name_plural = 'Posts'
         ordering = ["-created"]
+
+
+class Rate(models.Model):
+    rate_name = models.CharField(max_length=200,null=True, blank=True)
+    rate_value = models.IntegerField(null=True, blank=True)
+    post = models.ForeignKey(Post, related_name='post', blank=True)
+
+    def __str__(self):
+        return json.dumps({ "rate_name":self.rate_name , "rate_value": str(self.rate_value), "post": str(self.post) })
+
+    def get_absolute_url(self):
+        return reverse('rate-detail', args=[str(self.id)])
+        
+
 
 
 class Page(TimeStampedModel):

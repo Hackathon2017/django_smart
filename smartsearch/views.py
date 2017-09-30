@@ -19,7 +19,7 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .models import Specialist
-from .serializers import SpecialistSerializer
+from .serializers import *
 from django.http import Http404
 from django.views.generic import ListView
 
@@ -357,23 +357,19 @@ class SpecialistListView(generic.ListView):
         return Specialist.objects.all()
 
 
-class SpecialistList(APIView):
+class PostList(APIView):
 
     def get(self, request):
-        #specialists = Specialist.objects.all()
-        specialists = Specialist.objects.filter(speciality=request.GET.__getitem__('speciality'))
-        speciality = Speciality.objects.filter(id=request.GET.__getitem__('speciality')).values('title','domain')
-        domain = Domain.objects.filter(id=speciality[0]['domain']).values('title', 'about')
-        print(str(domain))
-        serializer = SpecialistSerializer(specialists, many=True)
-        json_specialists = JsonResponse(serializer.data, safe=False)
-        # jj = json.dumps(serializer.data)
-        # jj2 = json.loads(jj)
-        #jj2['speciality']= speciality
-        #serializers.serialize("json", self.get_queryset())
-        serializer.data[0]['speciality']=str(speciality[0])
-        serializer.data[0]['domain']=str(domain[0])
-        #serializer.data[0]['domain']=str(domain[0])
+        posts = Post.objects.filter(specialist=request.GET.__getitem__('specialist'))
+        serializer = PostSerializer(posts, many=True)
+
+        for i in range(len(serializer.data)):
+            rates_json= {}   
+            rates = Rate.objects.filter(post=serializer.data[i]['id']).values('rate_name', 'rate_value')
+
+            for j in range(len(rates)):
+                 rates_json[rates[j]['rate_name']]=str(str(rates[j]['rate_value']))
+            serializer.data[i]["rates"] = rates_json
         return JsonResponse(serializer.data, safe=False)
 
     def post(self, request):
@@ -383,6 +379,71 @@ class SpecialistList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class RateList(APIView):
+    def post(self, request):
+        print(request.data)
+        serializer = SpecialistSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SpecialistList(APIView):
+
+    def get(self, request):
+        #specialists = Specialist.objects.all()
+        specialists = Specialist.objects.filter(speciality=request.GET.__getitem__('speciality'))
+        speciality = Speciality.objects.filter(id=request.GET.__getitem__('speciality')).values('title','domain')
+        domain = Domain.objects.filter(id=speciality[0]['domain']).values('title', 'about')
+        serializer = SpecialistSerializer(specialists, many=True)
+        if (len(serializer.data)>0):
+            serializer.data[0]['speciality']=str(speciality[0])
+            serializer.data[0]['domain']=str(domain[0])
+        return JsonResponse(serializer.data, safe=False)
+
+    def post(self, request):
+        print(request.data)
+        serializer = SpecialistSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class SpecialityList(APIView):
+
+    def get(self, request):
+        specialities = Speciality.objects.filter(domain=request.GET.__getitem__('domain'))
+        domain = Domain.objects.filter(id=request.GET.__getitem__('domain')).values('title', 'about')
+        serializer = SpecialitySerializer(specialities, many=True)
+        for i in range(len(serializer.data)):
+            serializer.data[i]['domain']=str(domain[0])
+
+        return JsonResponse(serializer.data, safe=False)
+
+
+class SpecialityAllList(APIView):
+
+    def get(self, request):
+        specialities = Speciality.objects.all()
+        serializer = SpecialitySerializer(specialities, many=True)
+        for i in range(len(serializer.data)):
+            domain = Domain.objects.filter(id=int(serializer.data[i]['domain'])).values('title', 'about')
+            serializer.data[i]['domain']=str(domain[0])
+
+        return JsonResponse(serializer.data, safe=False)
+
+
+class DomainList(APIView):
+
+    def get(self, request):
+        domains = Domain.objects.all().values('id', 'title', 'about', 'imagePath')
+        serializer = DomainSerializer(domains, many=True)
+        return JsonResponse(serializer.data, safe=False)
+
 
 class SpecialistDetail(APIView):
     def get_object(self, pk):
@@ -420,8 +481,7 @@ class SpecialistDetailView(generic.DetailView):
 
 
 
-# Lists all specialist or creates a new one
-# specialist/
+# Lists all domains or creates a new one
 class DomainsListView(generic.ListView):
     model = Domain
     context_object_name = 'domain_list'   # your own name for the list as a template variable
@@ -431,24 +491,14 @@ class DomainsListView(generic.ListView):
         return Domain.objects.all()
 
 
-# def DomainSpecialitiesListView(request,pk):
-#     model = Speciality
-#     context_object_name = 'speciality_list'
-#     template_name = 'smartsearch/smartsearch_speciality_list.html'
+# Lists all domains or creates a new one
+class RateView(generic.ListView):
+    model = Rate
+    context_object_name = 'rate_list'   # your own name for the list as a template variable
+    template_name = 'smartsearch/smartsearch_domains_list.html'
 
-#     try:
-#         domain_id=Domain.objects.get(pk=pk)
-#     except Domain.DoesNotExist:
-#         raise Http404("Domain does not exist")
-
-#     def get_queryset(self): 
-#         return Speciality.objects.all()
-
-#     return render(
-#         request,
-#         'smartsearch/smartsearch_speciality_list.html',
-#         context={'domain':domain_id,}
-#     )
+    def get_queryset(self): 
+        return Domain.objects.all()
 
 
 class DomainSpecialitiesListView(generic.ListView):

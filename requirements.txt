@@ -13,3 +13,4 @@ six==1.10.0
 tablib==0.11.2
 django-picklefield==1.0.0 
 djangorestframework==3.6.4
+pyyaml==3.12

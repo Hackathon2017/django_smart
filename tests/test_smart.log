@@ -1,0 +1,139 @@
+2017-09-30 14:35:26,330 - INFO - TEST1: check_specialists_by_speciality()
+2017-09-30 14:35:26,336 - DEBUG - Starting new HTTP connection (1): 172.16.3.223
+2017-09-30 14:35:26,349 - DEBUG - http://172.16.3.223:8000 "GET /:8000/specialists?speciality=2 HTTP/1.1" 404 None
+2017-09-30 14:35:26,350 - ERROR - check_specialists_by_speciality: Failed 404 Client Error: Not Found for url: http://172.16.3.223:8000/:8000/specialists?speciality=2
+2017-09-30 14:36:06,357 - INFO - TEST1: check_specialists_by_speciality()
+2017-09-30 14:36:06,362 - DEBUG - Starting new HTTP connection (1): 172.16.3.223
+2017-09-30 14:36:06,376 - DEBUG - http://172.16.3.223:8000 "GET /:8000/specialists?speciality=2 HTTP/1.1" 404 None
+2017-09-30 14:36:06,377 - ERROR - check_specialists_by_speciality: Failed 404 Client Error: Not Found for url: http://172.16.3.223:8000/:8000/specialists?speciality=2
+2017-09-30 14:37:04,339 - INFO - TEST1: check_specialists_by_speciality()
+2017-09-30 14:37:04,345 - DEBUG - Starting new HTTP connection (1): 172.16.3.223
+2017-09-30 14:37:04,357 - DEBUG - http://172.16.3.223:8000 "GET /:8000/specialists?speciality=2 HTTP/1.1" 404 None
+2017-09-30 14:37:04,358 - ERROR - check_specialists_by_speciality: Failed 404 Client Error: Not Found for url: http://172.16.3.223:8000/:8000/specialists?speciality=2
+2017-09-30 14:37:45,887 - INFO - TEST1: check_specialists_by_speciality()
+2017-09-30 14:37:45,892 - DEBUG - Starting new HTTP connection (1): 172.16.3.223
+2017-09-30 14:37:45,896 - DEBUG - http://172.16.3.223:8000 "GET /specialists?speciality=2 HTTP/1.1" 301 None
+2017-09-30 14:37:45,899 - DEBUG - Resetting dropped connection: 172.16.3.223
+2017-09-30 14:37:45,906 - DEBUG - http://172.16.3.223:8000 "GET /specialists/?speciality=2 HTTP/1.1" 200 None
+2017-09-30 14:38:47,321 - INFO - TEST1: check_specialists_by_speciality()
+2017-09-30 14:38:47,326 - DEBUG - Starting new HTTP connection (1): 172.16.3.223
+2017-09-30 14:38:47,330 - DEBUG - http://172.16.3.223:8000 "GET /specialists?speciality=2 HTTP/1.1" 301 None
+2017-09-30 14:38:47,333 - DEBUG - Resetting dropped connection: 172.16.3.223
+2017-09-30 14:38:47,342 - DEBUG - http://172.16.3.223:8000 "GET /specialists/?speciality=2 HTTP/1.1" 200 None
+2017-09-30 14:38:47,344 - INFO - check_specialists_by_speciality() ret=[{'domain': "{'about': 'ça concerne les hôtels en France pour mission ou en Tunisie pour vacances', 'title': 'hotellerie'}", 'about_website': '', 'id': 2, 'geocode': '9 rue Balzac,\xa075008 Paris,\xa0France', 'speciality': "{'domain': 2, 'title': '5 étoiles'}", 'name': 'De Vigny Hotel', 'phone': '+33 1 67 00 07 88'}, {'about_website': '', 'id': 3, 'geocode': '6 Rue Blaise Desgoffe, 75006 Paris, France', 'speciality': 2, 'name': 'Victoria Palace', 'phone': '+33 1 44 63 07 88'}]
+2017-09-30 14:39:32,922 - INFO - TEST1: check_specialists_by_speciality()
+2017-09-30 14:39:32,929 - DEBUG - Starting new HTTP connection (1): 172.16.3.223
+2017-09-30 14:39:32,939 - DEBUG - http://172.16.3.223:8000 "GET /specialists?speciality=2 HTTP/1.1" 301 None
+2017-09-30 14:39:32,940 - DEBUG - Resetting dropped connection: 172.16.3.223
+2017-09-30 14:39:32,948 - DEBUG - http://172.16.3.223:8000 "GET /specialists/?speciality=2 HTTP/1.1" 200 None
+2017-09-30 14:40:02,119 - INFO - TEST1: check_specialists_by_speciality()
+2017-09-30 14:40:02,125 - DEBUG - Starting new HTTP connection (1): 172.16.3.223
+2017-09-30 14:40:02,130 - DEBUG - http://172.16.3.223:8000 "GET /specialists?speciality=2 HTTP/1.1" 301 None
+2017-09-30 14:40:02,131 - DEBUG - Resetting dropped connection: 172.16.3.223
+2017-09-30 14:40:02,139 - DEBUG - http://172.16.3.223:8000 "GET /specialists/?speciality=2 HTTP/1.1" 200 None
+2017-09-30 14:40:18,877 - INFO - TEST1: check_specialists_by_speciality()
+2017-09-30 14:40:18,882 - DEBUG - Starting new HTTP connection (1): 172.16.3.223
+2017-09-30 14:40:18,886 - DEBUG - http://172.16.3.223:8000 "GET /specialists?speciality=2 HTTP/1.1" 301 None
+2017-09-30 14:40:18,888 - DEBUG - Resetting dropped connection: 172.16.3.223
+2017-09-30 14:40:18,895 - DEBUG - http://172.16.3.223:8000 "GET /specialists/?speciality=2 HTTP/1.1" 200 None
+2017-09-30 14:41:26,255 - INFO - TEST1: check_specialists_by_speciality()
+2017-09-30 14:41:26,260 - DEBUG - Starting new HTTP connection (1): 172.16.3.223
+2017-09-30 14:41:26,264 - DEBUG - http://172.16.3.223:8000 "GET /specialists?speciality=2 HTTP/1.1" 301 None
+2017-09-30 14:41:26,266 - DEBUG - Resetting dropped connection: 172.16.3.223
+2017-09-30 14:41:26,274 - DEBUG - http://172.16.3.223:8000 "GET /specialists/?speciality=2 HTTP/1.1" 200 None
+2017-09-30 14:41:38,521 - INFO - TEST1: check_specialists_by_speciality()
+2017-09-30 14:41:38,526 - DEBUG - Starting new HTTP connection (1): 172.16.3.223
+2017-09-30 14:41:38,529 - DEBUG - http://172.16.3.223:8000 "GET /specialists?speciality=2 HTTP/1.1" 301 None
+2017-09-30 14:41:38,531 - DEBUG - Resetting dropped connection: 172.16.3.223
+2017-09-30 14:41:38,540 - DEBUG - http://172.16.3.223:8000 "GET /specialists/?speciality=2 HTTP/1.1" 200 None
+2017-09-30 14:41:38,542 - INFO - check_specialists_by_speciality() ret=[
+    {
+        "about_website": "",
+        "domain": "{'about': '\u00e7a concerne les h\u00f4tels en France pour mission ou en Tunisie pour vacances', 'title': 'hotellerie'}",
+        "geocode": "9 rue Balzac,\u00a075008 Paris,\u00a0France",
+        "id": 2,
+        "name": "De Vigny Hotel",
+        "phone": "+33 1 67 00 07 88",
+        "speciality": "{'domain': 2, 'title': '5 \u00e9toiles'}"
+    },
+    {
+        "about_website": "",
+        "geocode": "6 Rue Blaise Desgoffe, 75006 Paris, France",
+        "id": 3,
+        "name": "Victoria Palace",
+        "phone": "+33 1 44 63 07 88",
+        "speciality": 2
+    }
+]
+2017-09-30 14:42:29,420 - INFO - TEST1: check_specialists_by_speciality()
+2017-09-30 14:42:29,425 - DEBUG - Starting new HTTP connection (1): 172.16.3.223
+2017-09-30 14:42:29,429 - DEBUG - http://172.16.3.223:8000 "GET /specialists?speciality=2 HTTP/1.1" 301 None
+2017-09-30 14:42:29,431 - DEBUG - Resetting dropped connection: 172.16.3.223
+2017-09-30 14:42:29,438 - DEBUG - http://172.16.3.223:8000 "GET /specialists/?speciality=2 HTTP/1.1" 200 None
+2017-09-30 14:42:29,440 - INFO - check_specialists_by_speciality() ret=[
+  {
+    "about_website": "",
+    "domain": "{'about': '\u00e7a concerne les h\u00f4tels en France pour mission ou en Tunisie pour vacances', 'title': 'hotellerie'}",
+    "geocode": "9 rue Balzac,\u00a075008 Paris,\u00a0France",
+    "id": 2,
+    "name": "De Vigny Hotel",
+    "phone": "+33 1 67 00 07 88",
+    "speciality": "{'domain': 2, 'title': '5 \u00e9toiles'}"
+  },
+  {
+    "about_website": "",
+    "geocode": "6 Rue Blaise Desgoffe, 75006 Paris, France",
+    "id": 3,
+    "name": "Victoria Palace",
+    "phone": "+33 1 44 63 07 88",
+    "speciality": 2
+  }
+]
+2017-09-30 14:45:06,123 - INFO - TEST1: check_specialists_by_speciality()
+2017-09-30 14:45:06,128 - DEBUG - Starting new HTTP connection (1): 172.16.3.223
+2017-09-30 14:45:06,132 - DEBUG - http://172.16.3.223:8000 "GET /specialists?speciality=2 HTTP/1.1" 301 None
+2017-09-30 14:45:06,134 - DEBUG - Resetting dropped connection: 172.16.3.223
+2017-09-30 14:45:06,141 - DEBUG - http://172.16.3.223:8000 "GET /specialists/?speciality=2 HTTP/1.1" 200 None
+2017-09-30 14:45:06,144 - INFO - check_specialists_by_speciality() ret=[
+  {
+    "about_website": "",
+    "domain": "{'about': '\u00e7a concerne les h\u00f4tels en France pour mission ou en Tunisie pour vacances', 'title': 'hotellerie'}",
+    "geocode": "9 rue Balzac,\u00a075008 Paris,\u00a0France",
+    "id": 2,
+    "name": "De Vigny Hotel",
+    "phone": "+33 1 67 00 07 88",
+    "speciality": "{'domain': 2, 'title': '5 \u00e9toiles'}"
+  },
+  {
+    "about_website": "",
+    "geocode": "6 Rue Blaise Desgoffe, 75006 Paris, France",
+    "id": 3,
+    "name": "Victoria Palace",
+    "phone": "+33 1 44 63 07 88",
+    "speciality": 2
+  }
+]
+2017-09-30 14:58:13,132 - INFO - TEST1: check_specialists_by_speciality()
+2017-09-30 14:58:13,147 - DEBUG - Starting new HTTP connection (1): 172.16.3.223
+2017-09-30 14:58:13,160 - DEBUG - http://172.16.3.223:8000 "GET /specialists?speciality=2 HTTP/1.1" 301 None
+2017-09-30 14:58:13,165 - DEBUG - Resetting dropped connection: 172.16.3.223
+2017-09-30 14:58:13,177 - DEBUG - http://172.16.3.223:8000 "GET /specialists/?speciality=2 HTTP/1.1" 200 None
+2017-09-30 14:58:13,180 - INFO - check_specialists_by_speciality() ret=[
+  {
+    "about_website": "",
+    "domain": "{'about': '\u00e7a concerne les h\u00f4tels en France pour mission ou en Tunisie pour vacances', 'title': 'hotellerie'}",
+    "geocode": "9 rue Balzac,\u00a075008 Paris,\u00a0France",
+    "id": 2,
+    "name": "De Vigny Hotel",
+    "phone": "+33 1 67 00 07 88",
+    "speciality": "{'domain': 2, 'title': '5 \u00e9toiles'}"
+  },
+  {
+    "about_website": "",
+    "geocode": "6 Rue Blaise Desgoffe, 75006 Paris, France",
+    "id": 3,
+    "name": "Victoria Palace",
+    "phone": "+33 1 44 63 07 88",
+    "speciality": 2
+  }
+]

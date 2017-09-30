@@ -2,3 +2,4 @@ smartsearch/__pycache__/*
 smartsearch/__pycache__/
 smartsearch/migrations/__pycache__/
 smartsearchproject/__pycache__/
+tests/__pycache__/

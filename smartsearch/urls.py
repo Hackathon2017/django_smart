@@ -25,15 +25,19 @@ urlpatterns = [
 
     url(r'^$', HomepageView.as_view(), name='homepage'),
 	url(r'^specialists/', SpecialistList.as_view()),
+    url(r'^domains/', DomainList.as_view()),
+    url(r'^specialities/all', SpecialityAllList.as_view()),
+    url(r'^specialities/', SpecialityList.as_view()),
+    url(r'^posts/', PostList.as_view()),
     url(r'^test/', TestView.as_view(), name='test'),
 
 	url(r'^specialist/', SpecialistListView.as_view(), name='specialist'),
     url(r'^specialist/(?P<pk>\d+)$', SpecialistDetailView.as_view(), name='specialist-detail2'),
-    url(r'^domains/$', DomainsListView.as_view(), name='domain-list'),
+    url(r'^domains-list/$', DomainsListView.as_view(), name='domain-list'),
+    url(r'^rate/(?P<pk>\d+)$', RateView.as_view(), name='rate-detail'),
     url(r'^domain/(?P<pk>\d+)$', DomainSpecialitiesListView.as_view(), name='domain-detail'),
     url(r'^speciality/(?P<pk>\d+)$', SpecialistesListView.as_view(), name='speciality-detail'),
     url(r'^specialist_detail/(?P<pk>[\w\-]+)/$', SpecialistPostsView.as_view(), name='specialist-detail'),
-
 
 
    # url(r'^specialists/(?P<pk>[0-9]+)/', SpecialistDetail.as_view()),	

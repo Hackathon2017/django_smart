@@ -22,8 +22,8 @@ class DomainAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
     resource_class = DomainResource
 
-    list_display = ( 'title', 'about' )
-    search_fields = [ 'title', 'about' ]
+    list_display = ( 'title', 'about', 'imagePath' )
+    search_fields = [ 'title', 'about', 'imagePath' ]
 
 
 class SpecialityResource(resources.ModelResource):
@@ -35,8 +35,21 @@ class SpecialityResource(resources.ModelResource):
 class SpecialityAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = SpecialityResource
 
-    list_display = ( 'title', 'domain' )
-    search_fields = [ 'title', 'domain' ]
+    list_display = ( 'title', 'domain', 'imagePath' )
+    search_fields = [ 'title', 'domain', 'imagePath' ]
+
+
+class RateResource(resources.ModelResource):
+
+    class Meta:
+        model = Rate
+
+
+class RateAdmin(ImportExportModelAdmin, admin.ModelAdmin):
+    resource_class = RateResource
+
+    list_display = ( 'rate_name', 'rate_value',  'post' )
+    search_fields = [ 'rate_name', 'rate_value',  'post' ]
 
 
 class SpecialistResource(resources.ModelResource):
@@ -78,7 +91,7 @@ class TagAdmin(ImportExportModelAdmin, admin.ModelAdmin):
 
 
 class TagAdminForm(forms.ModelForm):
-    meta_description = forms.CharField(
+    avis = forms.CharField(
         required=False,
         widget=AutosizedTextarea(
             attrs={'rows': 3, 'class': 'input-xlarge'}))
@@ -169,9 +182,10 @@ class VisitorAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     list_display = ('post', 'ip', 'created', 'modified')
 
 
-admin.site.register(Domain, DomainAdmin)
 admin.site.register(Speciality, SpecialityAdmin)
 admin.site.register(Specialist, SpecialistAdmin)
+admin.site.register(Rate, RateAdmin)
+admin.site.register(Domain, DomainAdmin)
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Tag, TagAdmin)
 admin.site.register(Post, PostAdmin)
