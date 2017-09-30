@@ -410,7 +410,7 @@ class SpecialistDetail(APIView):
         return Response(status=status.HTTP_204_NO_CONTENT)
 
 class TestView(APIView):
-    Specialist.objects.filter(id=2).delete()
+    Specialist.objects.filter(name="Hechmi hamdi").delete()
     print(Specialist.objects)
 
 

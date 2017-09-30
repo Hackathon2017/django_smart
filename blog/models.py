@@ -35,16 +35,23 @@ class Specialist(models.Model):
     about_website = models.TextField(null=True, blank=True)
     phone = models.CharField(max_length=200)
 
+    def __str__(self):
+        return self.name
+
+    def get_absolute_url(self):
+      return reverse('specialist-detail', args=[str(self.id)])
+
+
 class Rate(models.Model):
     rate_name = models.CharField(max_length=200)
     rate_value = models.IntegerField()
     specialist = models.ForeignKey(Specialist, related_name='specialist')
 
     def __str__(self):
-        return self.name
+        return self.rate_name
 
     def get_absolute_url(self):
-	    return reverse('specialist-detail', args=[str(self.id)])
+	    return reverse('rate-detail', args=[str(self.id)])
 		
 
 class TimeStampedModel(models.Model):

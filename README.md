@@ -55,7 +55,6 @@ import sys
 import requests, json  
 
 datas = json.dumps({
-        "id": 3,
         "name": "Hechmi hamdi",
         "geocode": "36.808314, 10.183735",
         "about_website": "no web site",
