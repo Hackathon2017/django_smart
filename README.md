@@ -1,7 +1,35 @@
 # specialist smart search
 
-c'est une application de recherche du bon sp�cialiste dans chaque domaine (Restauration, h�tellerie, m�decine, textile, bricolage�) recommand� par les employ�s de Sofrecom � travers un syst�me de classement "ranking" selon un score et l'avis (avec des photos).
+c'est une application de recherche du bon spécialiste dans chaque domaine (Restauration, hôtellerie, médecine, textile, bricolage…) recommandé par les employés de Sofrecom à travers un système de classement "ranking" selon un score et l'avis (avec des photos).
 
+
+### TREE
+```
+├───smartsearch
+│   ├───management
+│   │   ├───commands
+│   │   └───__pycache__
+│   ├───migrations
+│   │   └───__pycache__
+│   ├───templates
+│   │   ├───includes
+│   │   └───smartsearch
+│   ├───templatetags
+│   │   └───__pycache__
+│   ├───utils
+│   │   └───__pycache__
+│   └───__pycache__
+├───smartsearchproject
+│   └───__pycache__
+├───static
+│   └───assets
+│       ├───css
+│       ├───fonts
+│       ├───icons
+│       ├───images
+│       └───js
+└───tests
+```
 
 ### Install modules
 
