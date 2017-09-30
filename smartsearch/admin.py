@@ -135,9 +135,9 @@ class PostResource(resources.ModelResource):
 class PostAdmin(ImportExportModelAdmin, admin.ModelAdmin):
     resource_class = PostResource
     form = TagAdminForm
-    list_display = ('title', 'author', 'created', 'modified', 'publish', 'specialist')
+    list_display = ('title', 'author', 'created', 'modified', 'publish', 'specialist', 'ponctualite', 'traitement' )
     prepopulated_fields = {'slug': ('title',)}
-    search_fields = ['title', 'description', 'author__user__username']
+    search_fields = ['title', 'avis', 'description', 'author__user__username', 'ponctualite', 'traitement' ]
     list_filter = ['publish', 'author__user__username', 'created']
     list_per_page = 20
 

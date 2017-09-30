@@ -366,10 +366,17 @@ class PostList(APIView):
         for i in range(len(serializer.data)):
             rates_json= {}   
             rates = Rate.objects.filter(post=serializer.data[i]['id']).values('rate_name', 'rate_value')
+            author = Author.objects.filter(id=serializer.data[i]['author'])
 
             for j in range(len(rates)):
                  rates_json[rates[j]['rate_name']]=str(str(rates[j]['rate_value']))
             serializer.data[i]["rates"] = rates_json
+            if (len(author)>0):
+                serializer.data[i]["author"] = str(author[0])
+            else:
+                serializer.data[i]["author"] = ""
+
+
         return JsonResponse(serializer.data, safe=False)
 
     def post(self, request):
@@ -417,7 +424,7 @@ class SpecialityList(APIView):
 
     def get(self, request):
         specialities = Speciality.objects.filter(domain=request.GET.__getitem__('domain'))
-        domain = Domain.objects.filter(id=request.GET.__getitem__('domain')).values('title', 'about')
+        domain = Domain.objects.filter(id=request.GET.__getitem__('domain')).values('id', 'title', 'about', 'imagePath')
         serializer = SpecialitySerializer(specialities, many=True)
         for i in range(len(serializer.data)):
             serializer.data[i]['domain']=str(domain[0])

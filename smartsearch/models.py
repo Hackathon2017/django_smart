@@ -113,6 +113,9 @@ class Post(TimeStampedModel):
     keywords = models.CharField(max_length=200, null=True, blank=True,
                                 help_text='Keywords sparate by comma.')
 
+    ponctualite = models.IntegerField(null=True, blank=True) 
+    traitement = models.IntegerField(null=True, blank=True) 
+
     publish = models.BooleanField(default=True)
     objects = PostQuerySet.as_manager()
 

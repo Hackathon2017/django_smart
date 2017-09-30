@@ -57,7 +57,17 @@ def main():
         logging.error("check_specialist_posts(): TEST KO !!!!!!!")
 
 
-    #check_post_specialist(config['backend_host'], config['backend_port']) 
+
+
+    # Test 4
+    logging.info("TEST4: Description: check Posting specialist")
+    ret = check_post_specialists(config['backend_host'], config['backend_port'])
+    if (len(ret)>0):
+        logging.warn("check_post_specialists(): ret={} Number of items={}".format(json.dumps(ret, indent=2, sort_keys=True),len(ret)))
+        logging.info("check_post_specialists(): TEST OK !!!!!!")
+    else:
+        logging.error("check_post_specialists(): TEST KO !!!!!!!")
+
 
 
 
@@ -143,29 +153,39 @@ def check_specialist_posts(url, port, specialist):
 #         logging.error("check_specialists_by_speciality: Failed {0}".format(
 
 
-def check_post_specialist(url, port):
+def check_post_specialists(url, port):
     # Assemble url
-    backend_url = 'http://{0}:{1}/specialists \
-    '.format(url, port)
+    backend_url = 'http://{0}:{1}/specialists/'.format(url, port)
 
- #    try:
- #    	datas = json.dumps({
-	#         "name": "Hechmi hamdi",
-	#         "geocode": "36.808314, 10.183735",
-	#         "about_website": "no web site",
-	#         "phone": "71 455233",
-	#         "speciality": 2 
-	#         })
- #    	headers = {'content-type': 'application/json'}
-	#     response = requests.post(backend_url, data=datas, headers=headers)
- #    except ConnectionError as e:
- #        logging.error("post: Failed to create {0}".format(e))
- #        logging.error(json.loads(request.text))
- #    except requests.exceptions.HTTPError as e:
- #        logging.error("post: Failed to create {0}".format(e))
- #        logging.error(json.loads(request.text)['error']['reason'])
- #    except requests.exceptions.ConnectionError as e:
- #        logging.error("post: Failed to create {0}".format(e))
+
+    print(names.get_first_name(),names.get_last_name())
+    print(names.get_first_name(),names.get_last_name())
+    print(names.get_first_name(),names.get_last_name())
+    
+    random_name = names.get_first_name() + " " + names.get_last_name()
+    print("selected name:",random_name, "to be posted on:", backend_url)
+    
+    try:
+        datas = json.dumps({
+            "name": random_name,
+            "geocode": "36.808314, 10.183735",
+            "about_website": "no web site",
+            "phone": "71 455233",
+            "speciality": 2 
+        })
+        headers = {'content-type': 'application/json'}
+        request = requests.post(backend_url, data=datas, headers=headers)
+        request.raise_for_status()
+        print("response: ", request.text)
+        return json.loads(request.text)        
+    except ConnectionError as e:
+        logging.error("post: Failed to create {0}".format(e))
+        logging.error(json.loads(request.text))
+    except requests.exceptions.HTTPError as e:
+        logging.error("post: Failed to create {0}".format(e))
+        logging.error(json.loads(request.text)['error']['reason'])
+    except requests.exceptions.ConnectionError as e:
+        logging.error("post: Failed to create {0}".format(e))
 
 
 	# print("response: ", response.text)
