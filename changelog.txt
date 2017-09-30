@@ -1,0 +1,18 @@
+Release 0.0.9
+
+23cc6af fix post avis + update tests
+d527e74 update models according to frontend
+3cc7945 update of models + add unit tests with colors
+71b2931 change .gitignore
+9727e72 update files architecture
+3782570 add rate model
+c0312df add first unit test
+2adaa4c support API rest get/post
+3695ec4 support specialists
+5786556 fix specialists
+bfe7823 add requirements for pythons
+e42b28e update domain
+711385e update README
+3190d13 Add README
+f008ce2 django smart search start devs
+fa9b9f7 initial commit
